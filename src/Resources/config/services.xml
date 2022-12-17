@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="SyncData\Adapter\FakeStoreApiAdapter" />
+        <service id="SyncData\Import\ProductImport">
+            <argument type="service" id="SyncData\Adapter\FakeStoreApiAdapter"/>
+            <argument type="service" id="SyncData\Mapper\ProductMapper"/>
+            <argument type="service" id="SyncData\Service\SyncDataService"/>
+        </service>
+        <service id="SyncData\Mapper\ProductMapper">
+            <argument type="service" id="SyncData\Provider\Product\ProductProvider"/>
+            <argument type="service" id="SyncData\Provider\Product\TaxProvider"/>
+            <argument type="service" id="SyncData\Provider\Product\PriceProvider"/>
+            <argument type="service" id="SyncData\Provider\Product\ManufacturerProvider"/>
+            <argument type="service" id="SyncData\Provider\Product\MediaProvider"/>
+            <argument type="service" id="SyncData\Provider\Product\CategoriesProvider"/>
+            <argument type="service" id="SyncData\Provider\Product\VisibilitiesProvider"/>
+        </service>
+
+        <service id="SyncData\Provider\Product\ProductProvider">
+            <argument type="service" id="SyncData\Service\UuidService"/>
+        </service>
+
+        <service id="SyncData\Provider\Product\TaxProvider">
+            <argument type="service" id="SyncData\Service\ContextService"/>
+        </service>
+
+        <service id="SyncData\Provider\Product\PriceProvider" />
+
+        <service id="SyncData\Provider\Product\ManufacturerProvider">
+            <argument type="service" id="SyncData\Service\ContextService"/>
+        </service>
+
+        <service id="SyncData\Provider\Product\MediaProvider">
+            <argument type="service" id="SyncData\Service\UuidService"/>
+            <argument type="service" id="SyncData\Service\SyncDataService"/>
+            <argument type="service" id="SyncData\Service\ContextService"/>
+        </service>
+
+        <service id="SyncData\Provider\Product\CategoriesProvider">
+            <argument type="service" id="SyncData\Service\UuidService"/>
+            <argument type="service" id="SyncData\Service\ContextService"/>
+            <argument type="service" id="SyncData\Service\SyncDataService"/>
+        </service>
+
+        <service id="SyncData\Provider\Product\VisibilitiesProvider">
+            <argument type="service" id="SyncData\Service\UuidService"/>
+            <argument type="service" id="SyncData\Service\ContextService"/>
+        </service>
+
+        <service id="SyncData\Service\SyncDataService">
+            <argument type="service" id="SyncData\Service\ContextService"/>
+        </service>
+
+        <service id="SyncData\Service\ContextService">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+        </service>
+
+        <service id="SyncData\Service\UuidService"/>
+
+        <service id="SyncData\Command\ImportProductCommand">
+            <tag name="console.command" />
+            <argument type="service" id="SyncData\Import\ProductImport"/>
+        </service>
+
+        <service id="SyncData\Storefront\Controller\ImportProductController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="SyncData\Import\ProductImport"/>
+        </service>
+    </services>
+</container>

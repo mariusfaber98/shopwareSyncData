@@ -1,0 +1,21 @@
+{
+  "name": "marius-faber/sync-data",
+  "description": "Sync Data",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "SyncData\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "SyncData\\SyncData",
+    "label": {
+      "de-DE": "Sync Data",
+      "en-GB": "Sync Data"
+    }
+  },
+  "require": {
+    "vin-sw/shopware-sdk": "^1.7"
+  }
+}

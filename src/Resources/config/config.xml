@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Configuration</title>
+        <title lang="de-DE">Einstellungen</title>
+
+        <input-field type="text">
+            <name>domain</name>
+            <required>true</required>
+            <label>Domain</label>
+            <label lang="de-DE">Domain</label>
+        </input-field>
+
+        <input-field type="text">
+            <name>AccessKeyId</name>
+            <required>true</required>
+            <label>Access key ID</label>
+            <label lang="de-DE">Access key ID</label>
+        </input-field>
+
+        <input-field type="text">
+            <name>SecretAccessKey</name>
+            <required>true</required>
+            <label>Secret access key</label>
+            <label lang="de-DE">Secret access key</label>
+        </input-field>
+    </card>
+</config>
